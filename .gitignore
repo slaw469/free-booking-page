@@ -1,0 +1,8 @@
+# Your bookings (clients' names and emails). Never commit these.
+data/
+*.zip
+screenshots/
+node_modules/
+.env
+.DS_Store
+npm-debug.log*

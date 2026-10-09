@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Dashboard · Halfpast</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0f130e">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/geist.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/widget.css">
+  <link rel="stylesheet" href="assets/css/admin.css">
+  <script type="module" src="assets/js/admin.js"></script>
+</head>
+<body class="admin-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="app" id="app" hidden>
+    <aside class="rail on-dark">
+      <a class="wordmark" href="./" aria-label="Halfpast home">
+        <svg class="wordmark__mark" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="#c8f53c"/><path d="M16 16v8.5M16 16l5.5-4" fill="none" stroke="#0f130e" stroke-width="3.2" stroke-linecap="round"/></svg>
+        <span data-brand="name">Halfpast</span>
+      </a>
+
+      <nav class="nav" aria-label="Dashboard sections">
+        <a class="nav__item" href="#bookings" data-view="bookings">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#i-inbox"/></svg>
+          <span>Bookings</span>
+          <span class="nav__count mono" id="nav-count" hidden></span>
+        </a>
+        <a class="nav__item" href="#availability" data-view="availability">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#i-sliders"/></svg>
+          <span>Availability</span>
+        </a>
+        <a class="nav__item" href="#profile" data-view="profile">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#i-user"/></svg>
+          <span>Profile</span>
+        </a>
+      </nav>
+
+      <div class="share">
+        <p class="share__label">Your booking link</p>
+        <p class="share__url mono" id="share-url"></p>
+        <div class="share__actions">
+          <button class="btn btn--lime btn--sm" id="copy-link" type="button">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#i-copy"/></svg>
+            <span id="copy-link-label">Copy booking link</span>
+          </button>
+          <a class="btn btn--ghost btn--sm" href="book" target="_blank" rel="noopener" aria-label="Open booking page in a new tab">
+            Open
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#i-arrow-up-right"/></svg>
+          </a>
+        </div>
+      </div>
+      <button class="lock" id="lock" type="button" aria-label="Lock dashboard" hidden>
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#i-lock"/></svg>
+        Lock dashboard
+      </button>
+    </aside>
+
+    <main class="main" id="main">
+      <div id="app-error" class="notice" role="alert" hidden></div>
+
+      <!-- Bookings -->
+      <section class="view" id="view-bookings" aria-labelledby="bookings-title" hidden>
+        <header class="view__head">
+          <div>
+            <h1 class="view__title" id="bookings-title" tabindex="-1">Bookings</h1>
+            <p class="view__sub" id="bookings-sub">Loading…</p>
+          </div>
+        </header>
+        <div id="sample-banner" hidden></div>
+        <div id="bookings-body">
+          <div class="skel" style="height:132px;border-radius:16px"></div>
+          <div class="skel" style="height:72px;margin-top:24px"></div>
+          <div class="skel" style="height:72px;margin-top:8px"></div>
+        </div>
+      </section>
+
+      <!-- Availability -->
+      <section class="view" id="view-availability" aria-labelledby="availability-title" hidden>
+        <header class="view__head">
+          <div>
+            <h1 class="view__title" id="availability-title" tabindex="-1">Availability</h1>
+            <p class="view__sub">When people can book you. Changes save as you make them and show on your booking page straight away.</p>
+          </div>
+          <p class="save-state" data-save-state role="status" aria-live="polite"></p>
+        </header>
+        <div id="availability-body"></div>
+      </section>
+
+      <!-- Profile -->
+      <section class="view" id="view-profile" aria-labelledby="profile-title" hidden>
+        <header class="view__head">
+          <div>
+            <h1 class="view__title" id="profile-title" tabindex="-1">Profile</h1>
+            <p class="view__sub">What visitors see at the top of your booking page.</p>
+          </div>
+          <p class="save-state" data-save-state role="status" aria-live="polite"></p>
+        </header>
+        <div id="profile-body"></div>
+      </section>
+    </main>
+  </div>
+
+  <noscript><p style="padding:24px;text-align:center">The dashboard needs JavaScript turned on.</p></noscript>
+</body>
+</html>

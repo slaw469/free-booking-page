@@ -1,0 +1,21 @@
+{
+  "name": "free-booking-page",
+  "version": "1.0.0",
+  "description": "A free, self-hosted booking page: a landing page, a booking flow and a dashboard. No accounts, no keys, no dependencies.",
+  "private": true,
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "start:classic": "FRONTEND=ui node server.js",
+    "start:public": "FRONTEND=public node server.js",
+    "seed": "node scripts/samples.js add",
+    "clear": "node scripts/samples.js clear",
+    "clear-samples": "node scripts/samples.js clear",
+    "test": "node --test",
+    "package": "node scripts/package.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT"
+}

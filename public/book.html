@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Book a time</title>
+  <meta name="description" content="Pick a day, pick a time, done.">
+  <meta name="theme-color" content="#f5f4ee">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/geist.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/widget.css">
+  <link rel="stylesheet" href="assets/css/book.css">
+  <script type="module" src="assets/js/book.js"></script>
+</head>
+<body class="book-page">
+  <a class="skip-link" href="#main">Skip to booking</a>
+
+  <main id="main" class="stage">
+    <div class="shell">
+      <div class="booking" id="booking" data-step="pick" aria-busy="true">
+
+        <!-- Who you are booking -->
+        <aside class="host" id="host" aria-label="Who you are meeting">
+          <div class="host__top">
+            <div class="skel" style="width:64px;height:64px;border-radius:50%"></div>
+            <div style="display:grid;gap:8px">
+              <div class="skel" style="width:140px;height:18px"></div>
+              <div class="skel" style="width:96px;height:14px"></div>
+            </div>
+          </div>
+          <div class="skel" style="width:80%;height:40px;margin-top:28px"></div>
+          <div class="skel" style="width:100%;height:14px;margin-top:20px"></div>
+          <div class="skel" style="width:88%;height:14px;margin-top:8px"></div>
+        </aside>
+
+        <div class="pane">
+          <p class="sr-only" id="announce" role="status" aria-live="polite"></p>
+          <div id="banner" class="pane__banner" hidden></div>
+
+          <!-- Step 1: day and time -->
+          <section class="step step--pick" id="step-pick" aria-labelledby="pick-title">
+            <h1 class="sr-only" id="pick-title" tabindex="-1">Pick a day and a time</h1>
+            <div class="pick">
+              <div class="pick__cal" id="cal">
+                <div class="skel" style="width:180px;height:30px;margin-bottom:24px"></div>
+                <div class="skel" style="width:100%;aspect-ratio:7/6;border-radius:16px"></div>
+              </div>
+              <div class="pick__slots" id="slots" aria-live="polite">
+                <div class="skel" style="width:150px;height:26px;margin-bottom:22px"></div>
+                <div class="slots__list">
+                  <div class="skel" style="height:52px"></div><div class="skel" style="height:52px"></div>
+                  <div class="skel" style="height:52px"></div><div class="skel" style="height:52px"></div>
+                  <div class="skel" style="height:52px"></div><div class="skel" style="height:52px"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Step 2: your details -->
+          <section class="step step--details" id="step-details" aria-labelledby="details-title" hidden>
+            <button class="back" id="back" type="button">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#i-arrow-left"/></svg>
+              Change time
+            </button>
+            <h1 class="step__title" id="details-title" tabindex="-1">Your details</h1>
+            <div class="chosen" id="chosen"></div>
+
+            <form class="form" id="form" novalidate>
+              <div class="field">
+                <label class="field__label" for="f-name">Name</label>
+                <input class="field__input" id="f-name" name="name" type="text" autocomplete="name" maxlength="80" required aria-describedby="f-name-error">
+                <p class="field__error" id="f-name-error" hidden></p>
+              </div>
+              <div class="field">
+                <label class="field__label" for="f-email">Email</label>
+                <input class="field__input" id="f-email" name="email" type="email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" maxlength="120" required aria-describedby="f-email-error">
+                <p class="field__error" id="f-email-error" hidden></p>
+              </div>
+              <div class="field">
+                <label class="field__label" for="f-note">What should we talk about? <small>Optional</small></label>
+                <textarea class="field__input" id="f-note" name="note" rows="3" maxlength="600" aria-describedby="f-note-count"></textarea>
+                <p class="field__hint mono" id="f-note-count">0 / 600</p>
+              </div>
+              <div id="form-error" class="notice" role="alert" hidden></div>
+              <button class="btn btn--arrow btn--block form__submit" id="submit" type="submit">
+                Confirm booking
+                <span class="btn__disc"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg></span>
+              </button>
+            </form>
+          </section>
+
+          <!-- Step 3: confirmed -->
+          <section class="step step--done" id="step-done" aria-labelledby="done-title" hidden></section>
+
+          <!-- Pinned to the bottom edge on a phone -->
+          <div class="actionbar" id="actionbar">
+            <div class="actionbar__text" id="actionbar-text">
+              <span class="actionbar__hint">Pick a time to continue</span>
+            </div>
+            <button class="btn btn--arrow" id="continue" type="button" aria-disabled="true">
+              Continue
+              <span class="btn__disc"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#i-arrow-right"/></svg></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="credit">
+      Scheduling by <a class="link" href="./" data-brand="name">Halfpast</a>. Free and self-hosted.
+    </p>
+  </main>
+
+  <noscript>
+    <p style="padding:24px;text-align:center">This booking page needs JavaScript turned on.</p>
+  </noscript>
+</body>
+</html>

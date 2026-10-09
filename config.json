@@ -1,0 +1,28 @@
+{
+  "profile": {
+    "name": "Your Name",
+    "agency": "Your Agency",
+    "description": "Tell me what you're working on and I'll show you how we can help. No pitch deck, just a conversation.",
+    "meetingName": "intro call"
+  },
+  "availability": {
+    "timezone": "America/Chicago",
+    "meetingLengthMinutes": 30,
+    "bufferMinutes": 0,
+    "daysAhead": 30,
+    "minimumNoticeMinutes": 60,
+    "days": {
+      "mon": { "enabled": true, "start": "09:00", "end": "17:00" },
+      "tue": { "enabled": true, "start": "09:00", "end": "17:00" },
+      "wed": { "enabled": true, "start": "09:00", "end": "17:00" },
+      "thu": { "enabled": true, "start": "09:00", "end": "17:00" },
+      "fri": { "enabled": true, "start": "09:00", "end": "17:00" },
+      "sat": { "enabled": false, "start": "10:00", "end": "14:00" },
+      "sun": { "enabled": false, "start": "10:00", "end": "14:00" }
+    }
+  },
+  "admin": {
+    "passcode": ""
+  },
+  "port": 4517
+}

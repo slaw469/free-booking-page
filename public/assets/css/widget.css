@@ -1,0 +1,463 @@
+/* The calendar, the time slots and the confirmation ticket. Shared by the
+   booking page and the self-playing demo on the landing page. */
+
+/* ---------- calendar ---------- */
+
+.cal {
+  --cell: 58px;
+  width: 100%;
+  max-width: calc(var(--cell) * 7 + 36px);
+}
+.cal__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.cal__title {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-family: var(--display);
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+.cal__year {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--stone);
+  letter-spacing: 0;
+}
+.cal__nav {
+  display: flex;
+  gap: 6px;
+}
+.cal__arrow {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(15, 19, 14, 0.06);
+  color: var(--ink);
+  transition: transform var(--t-press) var(--ease), opacity var(--t-press) var(--ease);
+}
+.cal__arrow .icon {
+  width: 20px;
+  height: 20px;
+  stroke-width: 2;
+}
+.cal__arrow:active {
+  transform: scale(0.92);
+}
+.cal__arrow:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.cal__grid {
+  display: grid;
+  gap: 4px;
+}
+.cal__grid.from-next {
+  animation: cal-next var(--t-panel) var(--ease) both;
+}
+.cal__grid.from-prev {
+  animation: cal-prev var(--t-panel) var(--ease) both;
+}
+@keyframes cal-next {
+  from {
+    opacity: 0;
+    transform: translateX(18px);
+  }
+}
+@keyframes cal-prev {
+  from {
+    opacity: 0;
+    transform: translateX(-18px);
+  }
+}
+.cal__row {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 4px;
+}
+.cal__dow {
+  display: grid;
+  place-items: center;
+  height: 28px;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--stone);
+}
+.cal__cell {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+}
+
+.cal__day {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  max-width: var(--cell);
+  max-height: var(--cell);
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  font-size: 17px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  -webkit-tap-highlight-color: transparent;
+}
+/* The disc behind the number: tinted when open, lime when chosen. */
+.cal__day::before {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  border-radius: 50%;
+  background: rgba(15, 19, 14, 0.07);
+  opacity: 0;
+  transform: scale(0.6);
+  transition: transform var(--t-select) var(--ease), opacity var(--t-select) var(--ease);
+}
+.cal__num {
+  position: relative;
+}
+
+.cal__day.is-off {
+  color: #b9bdb2;
+  cursor: default;
+}
+.cal__day.is-none {
+  color: #7d8478;
+}
+.cal__day.is-open {
+  color: var(--ink);
+  font-weight: 650;
+}
+.cal__day.is-open::before {
+  opacity: 1;
+  transform: none;
+}
+@media (hover: hover) {
+  .cal__day.is-open:not(.is-selected):hover::before {
+    background: rgba(15, 19, 14, 0.16);
+    transform: scale(1.06);
+  }
+  .cal__day.is-none:not(.is-selected):hover::before {
+    opacity: 0.6;
+    transform: none;
+  }
+}
+.cal__day.is-open:active::before {
+  transform: scale(0.92);
+}
+
+.cal__day.is-selected {
+  color: var(--ink);
+  font-weight: 750;
+}
+.cal__day.is-selected::before {
+  inset: 0;
+  background: var(--lime);
+  opacity: 1;
+  transform: none;
+  box-shadow: inset 0 0 0 1.5px rgba(15, 19, 14, 0.85);
+}
+.cal__day.is-selected.is-none::before {
+  background: var(--paper-2);
+}
+.cal__day.is-fresh::before {
+  animation: disc-pop 420ms var(--ease-pop) both;
+}
+.cal__day.is-fresh .cal__num {
+  animation: num-pop 420ms var(--ease-pop) both;
+}
+@keyframes disc-pop {
+  0% {
+    transform: scale(0.4);
+    opacity: 0.4;
+  }
+  100% {
+    transform: none;
+    opacity: 1;
+  }
+}
+@keyframes num-pop {
+  0% {
+    transform: scale(0.8);
+  }
+  55% {
+    transform: scale(1.18);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+/* Today: a small tick mark under the number. */
+.cal__day.is-today::after {
+  content: "";
+  position: absolute;
+  bottom: 14%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  margin-left: -2.5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* ---------- slots ---------- */
+
+.slots__group + .slots__group {
+  margin-top: 20px;
+}
+.slots__label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--stone);
+}
+.slots__label::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+.slots__list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.slot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: var(--r-control);
+  background: var(--card);
+  box-shadow: inset 0 0 0 1.5px var(--line-strong);
+  font-family: var(--mono);
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  transition: transform var(--t-press) var(--ease);
+  animation: slot-in 420ms var(--ease) both;
+  animation-delay: calc(var(--i, 0) * 28ms);
+  -webkit-tap-highlight-color: transparent;
+}
+/* A background refresh redraws the list without replaying the entrance. */
+.is-quiet .slot {
+  animation: none;
+}
+@keyframes slot-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+/* Lime fill that scales in from the centre when the slot is picked. */
+.slot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--lime);
+  box-shadow: inset 0 0 0 1.5px rgba(15, 19, 14, 0.85);
+  opacity: 0;
+  transform: scale(0.86);
+  transition: transform var(--t-select) var(--ease-pop), opacity 160ms var(--ease);
+}
+.slot__time,
+.slot__tick {
+  position: relative;
+}
+.slot__time {
+  transition: transform var(--t-select) var(--ease);
+}
+.slot__tick {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  margin-top: -9px;
+  stroke-width: 2.6;
+  opacity: 0;
+  transform: scale(0.3) rotate(-30deg);
+  transition: transform var(--t-select) var(--ease-pop), opacity 120ms var(--ease);
+}
+@media (hover: hover) {
+  .slot:not(.is-selected):hover {
+    box-shadow: inset 0 0 0 1.5px var(--ink);
+  }
+}
+.slot:active {
+  transform: scale(0.96);
+}
+.slot.is-selected {
+  font-weight: 650;
+}
+.slot.is-selected::before {
+  opacity: 1;
+  transform: none;
+}
+.slot.is-selected .slot__time {
+  transform: translateX(-10px);
+}
+.slot.is-selected .slot__tick {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- confirmation ticket ---------- */
+
+.ticket {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  border-radius: var(--r-card);
+  background: var(--ink);
+  color: var(--paper);
+  overflow: hidden;
+}
+.ticket__date {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 2px;
+  min-width: 124px;
+  padding: 22px 20px;
+  background: var(--lime);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.ticket__day {
+  font-family: var(--display);
+  font-size: 68px;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 0.92;
+}
+.ticket__info {
+  position: relative;
+  display: grid;
+  align-content: center;
+  gap: 6px;
+  padding: 22px 24px;
+  min-width: 0;
+}
+/* Perforation between the stub and the body. */
+.ticket__info::before {
+  content: "";
+  position: absolute;
+  left: -1px;
+  top: 12px;
+  bottom: 12px;
+  border-left: 2px dashed rgba(245, 244, 238, 0.28);
+}
+.ticket__time {
+  font-family: var(--mono);
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+}
+.ticket__line {
+  font-size: 15px;
+  color: var(--fog);
+  overflow-wrap: anywhere;
+}
+.ticket__line strong {
+  color: var(--paper);
+  font-weight: 600;
+}
+
+.tick {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--lime);
+  color: var(--ink);
+}
+.tick .icon {
+  width: 30px;
+  height: 30px;
+  stroke-width: 2.6;
+}
+.tick::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--lime);
+  opacity: 0;
+}
+.is-celebrating .tick {
+  animation: tick-pop 620ms var(--ease-pop) both;
+}
+.is-celebrating .tick .icon {
+  animation: tick-mark 520ms var(--ease-pop) 160ms both;
+}
+.is-celebrating .tick::after {
+  animation: tick-ring 900ms var(--ease) 120ms both;
+}
+@keyframes tick-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+}
+@keyframes tick-mark {
+  from {
+    opacity: 0;
+    transform: scale(0.2) rotate(-40deg);
+  }
+}
+@keyframes tick-ring {
+  0% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2.1);
+  }
+}
+.is-celebrating .settle {
+  animation: settle 620ms var(--ease) both;
+  animation-delay: calc(180ms + var(--i, 0) * 90ms);
+}
+@keyframes settle {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}

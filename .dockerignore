@@ -1,0 +1,8 @@
+data
+node_modules
+screenshots
+test
+*.zip
+.git
+.env
+.DS_Store

@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Halfpast · Free, self-hosted scheduling you own</title>
+  <meta name="description" content="A free, open-source booking page you run yourself. Visitors pick a time, it lands on your dashboard, and the data stays with you.">
+  <meta name="theme-color" content="#0f130e">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/geist.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/widget.css">
+  <link rel="stylesheet" href="assets/css/landing.css">
+  <script type="module" src="assets/js/landing.js"></script>
+</head>
+<body class="landing">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="topbar on-dark">
+    <nav class="topbar__pill" aria-label="Main">
+      <a class="wordmark" href="./" aria-label="Halfpast home">
+        <svg class="wordmark__mark" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="#c8f53c"/><path d="M16 16v8.5M16 16l5.5-4" fill="none" stroke="#0f130e" stroke-width="3.2" stroke-linecap="round"/></svg>
+        <span data-brand="name">Halfpast</span>
+      </a>
+      <div class="topbar__links">
+        <a href="#how">How it works</a>
+        <a href="#whats-inside">What you get</a>
+        <a href="#run">Run it</a>
+      </div>
+      <a class="btn btn--lime btn--sm" href="book">Book a time</a>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ============ Hero ============ -->
+    <section class="hero on-dark">
+      <div class="wrap hero__grid">
+        <div class="hero__copy">
+          <p class="eyebrow"><span class="eyebrow__dot"></span>Free · MIT licensed · Self-hosted</p>
+          <h1 class="hero__title">
+            <span class="line"><span>Let people</span></span>
+            <span class="line"><span>book you.</span></span>
+            <span class="line"><span><mark>Pay nobody.</mark></span></span>
+          </h1>
+          <p class="hero__lede">
+            <span data-brand="name">Halfpast</span> is a booking page you run yourself. Someone opens your link, picks a time,
+            and it lands on your dashboard. No subscription, no account, and the bookings stay in a file you own.
+          </p>
+          <div class="hero__cta">
+            <a class="btn btn--lime btn--arrow" href="book">
+              Open the booking page
+              <span class="btn__disc"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#i-arrow-right"/></svg></span>
+            </a>
+            <a class="btn btn--ghost" href="admin">Open the dashboard</a>
+          </div>
+          <ul class="hero__facts">
+            <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg>No account</li>
+            <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg>No monthly fee</li>
+            <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg>No packages to install</li>
+          </ul>
+        </div>
+
+        <div class="hero__stage">
+          <!-- Spinning stamp -->
+          <svg class="stamp" viewBox="0 0 120 120" aria-hidden="true">
+            <defs><path id="stamp-path" d="M60 60m-44 0a44 44 0 1 1 88 0a44 44 0 1 1-88 0"/></defs>
+            <circle cx="60" cy="60" r="60" fill="#c8f53c"/>
+            <g class="stamp__spin">
+              <text><textPath href="#stamp-path" startOffset="0" textLength="270" lengthAdjust="spacing">FREE FOREVER · YOURS TO KEEP · NO MONTHLY FEE ·</textPath></text>
+            </g>
+            <circle cx="60" cy="60" r="20" fill="#0f130e"/>
+            <path d="M60 60v11M60 60l7-5" fill="none" stroke="#c8f53c" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+
+          <div class="demo-shell">
+            <div class="demo" id="demo" role="region" aria-label="Interactive demo of the booking page">
+              <noscript><p style="padding:32px;color:#0f130e">Turn on JavaScript to see the demo, or open the booking page.</p></noscript>
+            </div>
+          </div>
+          <p class="hero__caption"><span class="live-dot" aria-hidden="true"></span>Live demo. Go on, click a day.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Ticker ============ -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker__track">
+        <span>Pick a day</span><i></i><span>Pick a time</span><i></i><span>Done</span><i></i>
+        <span>Pick a day</span><i></i><span>Pick a time</span><i></i><span>Done</span><i></i>
+        <span>Pick a day</span><i></i><span>Pick a time</span><i></i><span>Done</span><i></i>
+        <span>Pick a day</span><i></i><span>Pick a time</span><i></i><span>Done</span><i></i>
+      </div>
+    </div>
+
+    <!-- ============ How it works ============ -->
+    <section class="how" id="how" aria-labelledby="how-title">
+      <div class="wrap how__grid">
+        <div class="how__intro">
+          <p class="kicker">How it works</p>
+          <h2 class="title" id="how-title" data-reveal>Three taps and it is in the diary.</h2>
+          <p class="how__lede" data-reveal>You send one link. They do the rest. Nobody emails back and forth about Tuesday.</p>
+        </div>
+
+        <ol class="steps">
+          <li class="stepcard" data-reveal>
+            <span class="stepcard__num">01</span>
+            <div class="stepcard__body">
+              <h3>They pick a time</h3>
+              <p>Your page only offers the times you are actually free, in your timezone. Visitors somewhere else see their own local time next to it.</p>
+            </div>
+            <div class="vig vig--slots" aria-hidden="true">
+              <span class="vslot">1:30 PM</span>
+              <span class="vslot is-on">2:00 PM<svg class="icon" viewBox="0 0 24 24"><use href="assets/icons.svg#i-check"/></svg></span>
+              <span class="vslot">2:30 PM</span>
+            </div>
+          </li>
+          <li class="stepcard" data-reveal>
+            <span class="stepcard__num">02</span>
+            <div class="stepcard__body">
+              <h3>They confirm</h3>
+              <p>Name, email, an optional note. The server checks the slot is still open before it saves, so two people can never book the same time.</p>
+            </div>
+            <div class="vig vig--form" aria-hidden="true">
+              <span class="vfield"><em>Name</em><b></b></span>
+              <span class="vfield"><em>Email</em><b style="width:74%"></b></span>
+              <span class="vbtn">Confirm booking</span>
+            </div>
+          </li>
+          <li class="stepcard" data-reveal>
+            <span class="stepcard__num">03</span>
+            <div class="stepcard__body">
+              <h3>It lands on your dashboard</h3>
+              <p>The booking shows up on your dashboard within seconds. They get a calendar file. Cancel it and that time opens up again.</p>
+            </div>
+            <div class="vig vig--row" aria-hidden="true">
+              <span class="vrow__time">2:00 PM</span>
+              <span class="vrow__who"><b></b><i></i></span>
+              <span class="vrow__new">New</span>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ What you get ============ -->
+    <section class="inside on-dark" id="whats-inside" aria-labelledby="inside-title">
+      <div class="wrap">
+        <div class="inside__head">
+          <p class="kicker">What you get</p>
+          <h2 class="title" id="inside-title" data-reveal>Everything a booking link needs. Nothing you rent.</h2>
+        </div>
+
+        <div class="bento">
+          <article class="tile tile--page" data-reveal>
+            <div class="tile__text">
+              <h3>A booking page with your name on it</h3>
+              <p>Your name, your agency, what the call is for and how long it runs. A month calendar, the open times, a short form and a confirmation.</p>
+            </div>
+            <div class="mock mock--page" aria-hidden="true">
+              <div class="mock__host">
+                <span class="mock__avatar">Y</span>
+                <span><b>Your Name</b><i>Your Agency</i></span>
+              </div>
+              <p class="mock__meeting">30 min intro call</p>
+              <div class="mock__days">
+                <span>12</span><span>13</span><span class="is-on">14</span><span>15</span><span>16</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="tile tile--dash" data-reveal>
+            <div class="tile__text">
+              <h3>A dashboard</h3>
+              <p>Who booked, when, their email and their note. Cancel a booking and the slot reopens.</p>
+            </div>
+            <ul class="mock mock--list" aria-hidden="true">
+              <li><span class="mono">10:00 AM</span><b></b><em>Cancel</em></li>
+              <li><span class="mono">1:30 PM</span><b style="width:52%"></b><em>Cancel</em></li>
+              <li><span class="mono">3:00 PM</span><b style="width:68%"></b><em>Cancel</em></li>
+            </ul>
+          </article>
+
+          <article class="tile tile--rules" data-reveal>
+            <div class="tile__text">
+              <h3>Availability rules</h3>
+              <p>Working days, hours for each day, meeting length, a buffer between calls and how far ahead people can book.</p>
+            </div>
+            <div class="mock mock--week" aria-hidden="true">
+              <span class="is-on">M</span><span class="is-on">T</span><span class="is-on">W</span><span class="is-on">T</span><span class="is-on">F</span><span>S</span><span>S</span>
+            </div>
+          </article>
+
+          <article class="tile tile--ics" data-reveal>
+            <div class="tile__text">
+              <h3>An add-to-calendar file</h3>
+              <p>One button on the confirmation screen downloads an .ics file that opens in Google Calendar, Apple Calendar and Outlook.</p>
+            </div>
+            <div class="mock mock--file" aria-hidden="true">
+              <svg class="icon" viewBox="0 0 24 24"><use href="assets/icons.svg#i-calendar-plus"/></svg>
+              <span class="mono">booking.ics</span>
+            </div>
+          </article>
+
+          <article class="tile tile--data" data-reveal>
+            <div class="tile__text">
+              <h3>Your data stays with you</h3>
+              <p>Every booking is saved to one readable file on the machine you run it on. No database, no third party, no tracking scripts. Back it up by copying it.</p>
+            </div>
+            <pre class="mock mock--code mono" aria-hidden="true"><span class="c-dim">// data/bookings.json</span>
+{
+  <span class="c-key">"start"</span>: <span class="c-str">"2026-10-14T19:00:00.000Z"</span>,
+  <span class="c-key">"name"</span>:  <span class="c-str">"Someone who booked you"</span>,
+  <span class="c-key">"note"</span>:  <span class="c-str">"Need a new website"</span>
+}</pre>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Run it ============ -->
+    <section class="run" id="run" aria-labelledby="run-title">
+      <div class="wrap run__grid">
+        <div class="run__intro">
+          <p class="kicker">Run it</p>
+          <h2 class="title" id="run-title" data-reveal>One command on your laptop. Any Node host when you want a public link.</h2>
+        </div>
+
+        <div class="term on-dark" data-reveal>
+          <div class="term__bar">
+            <span class="term__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="term__name mono">Terminal</span>
+            <button class="term__copy" id="copy-cmd" type="button" data-copy="npm start">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#i-copy"/></svg>
+              <span>Copy</span>
+            </button>
+          </div>
+          <pre class="term__body mono"><span class="c-dim">$</span> <span class="c-cmd">npm start</span>
+
+  Free Booking Page is running
+
+  <span class="c-dim">Booking page</span>   http://localhost:4517<span class="c-lime">/book</span>
+  <span class="c-dim">Dashboard</span>      http://localhost:4517<span class="c-lime">/admin</span><span class="term__caret" aria-hidden="true"></span></pre>
+        </div>
+
+        <div class="run__cols">
+          <div class="run__col" data-reveal>
+            <h3>On your laptop</h3>
+            <p>You need Node.js 18 or newer and nothing else. There is no build step and no packages to download. It starts with a few clearly marked sample bookings that you can clear in one click.</p>
+          </div>
+          <div class="run__col" data-reveal>
+            <h3>On a server you control</h3>
+            <p>Any host that runs Node will do. Set <code>ADMIN_PASSCODE</code> to lock the dashboard and <code>DATA_DIR</code> to a folder that survives restarts. The README walks through it.</p>
+          </div>
+          <div class="run__col run__col--plain" data-reveal>
+            <h3>What it leaves out</h3>
+            <p>It does not sync with Google or Outlook calendars, and it does not send emails or video links. You check the dashboard; your guest keeps the calendar file. If you need those today, a paid scheduler is still the right tool.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Final call ============ -->
+    <section class="final" aria-labelledby="final-title">
+      <div class="wrap final__inner">
+        <h2 class="final__title" id="final-title" data-reveal>Your link.<br>Your hours.<br>Your data.</h2>
+        <div class="final__side" data-reveal>
+          <p>Free, and MIT licensed, so you can rename it, restyle it and put your own name on it.</p>
+          <div class="final__cta">
+            <a class="btn btn--arrow" href="book">
+              Open the booking page
+              <span class="btn__disc"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#i-arrow-right"/></svg></span>
+            </a>
+            <a class="btn btn--ghost" href="admin">Open the dashboard</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot on-dark">
+    <div class="wrap foot__inner">
+      <div class="foot__brand">
+        <a class="wordmark" href="./" aria-label="Halfpast home">
+          <svg class="wordmark__mark" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="#c8f53c"/><path d="M16 16v8.5M16 16l5.5-4" fill="none" stroke="#0f130e" stroke-width="3.2" stroke-linecap="round"/></svg>
+          <span data-brand="name">Halfpast</span>
+        </a>
+        <p class="foot__tag" data-brand="tagline">Free, self-hosted scheduling you own.</p>
+      </div>
+      <nav class="foot__links" aria-label="Footer">
+        <a href="book">Booking page</a>
+        <a href="admin">Dashboard</a>
+        <a href="#run">Run it</a>
+        <a href="#" data-brand="source" hidden>Source</a>
+      </nav>
+      <p class="foot__legal">
+        <span>Free and open source under the MIT licence.</span>
+        <span data-brand="credit">Built with AI in an afternoon. Yours to rename, restyle and ship.</span>
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

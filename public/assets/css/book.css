@@ -1,0 +1,677 @@
+/* Booking page layout. The calendar, slots and ticket live in widget.css. */
+
+.book-page {
+  background: var(--paper);
+}
+
+.stage {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 20px;
+  min-height: 100dvh;
+  padding: 32px 24px;
+}
+
+/* Outer tray + inner card: the card sits in a shallow well. */
+.shell {
+  width: 100%;
+  max-width: 1216px;
+  padding: 8px;
+  border-radius: 36px;
+  background: rgba(15, 19, 14, 0.045);
+  box-shadow: inset 0 0 0 1px rgba(15, 19, 14, 0.05);
+}
+.booking {
+  display: grid;
+  grid-template-columns: 340px minmax(0, 1fr);
+  min-height: 640px;
+  border-radius: var(--r-shell);
+  background: var(--card);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.credit {
+  font-size: 14px;
+  color: var(--stone);
+  text-align: center;
+}
+
+/* ---------- host ---------- */
+
+.host {
+  display: flex;
+  flex-direction: column;
+  padding: 40px 36px;
+  background: #fbfaf6;
+  border-right: 1px solid var(--line);
+  min-width: 0;
+}
+.host__top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+.avatar {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--lime);
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.host__who {
+  min-width: 0;
+}
+.host__name {
+  font-size: 19px;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+.host__agency {
+  font-size: 15px;
+  color: var(--stone);
+  overflow-wrap: anywhere;
+}
+.host__meeting {
+  margin-top: 32px;
+  font-family: var(--display);
+  font-size: 42px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.98;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+.host__meeting::first-letter {
+  text-transform: uppercase;
+}
+.host__desc {
+  margin-top: 18px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--stone);
+  overflow-wrap: anywhere;
+  white-space: pre-line;
+}
+.host__meta {
+  display: grid;
+  gap: 10px;
+  margin: 28px 0 0;
+  padding: 24px 0 0;
+  border-top: 1px solid var(--line);
+  list-style: none;
+  font-size: 15px;
+  font-weight: 500;
+}
+.host__meta li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.host__meta .icon {
+  width: 20px;
+  height: 20px;
+  color: var(--stone);
+}
+
+/* ---------- right-hand pane ---------- */
+
+.pane {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 40px;
+}
+.pane__banner {
+  margin-bottom: 20px;
+  animation: step-in var(--t-panel) var(--ease) both;
+}
+.pane__banner .notice {
+  align-items: center;
+}
+.pane__banner .btn {
+  margin-left: auto;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  animation: step-in var(--t-panel) var(--ease) both;
+}
+.step.is-back {
+  animation-name: step-back;
+}
+@keyframes step-in {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+}
+@keyframes step-back {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+}
+.step__title {
+  font-family: var(--display);
+  font-size: 38px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+.step__title:focus {
+  outline: none;
+}
+
+/* ---------- step 1 ---------- */
+
+.pick {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 324px;
+  gap: 36px;
+  align-items: start;
+}
+/* Three across, so a full day of half-hour times fits without scrolling. */
+.pick__slots .slots__list {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.pick__slots .slot {
+  font-size: 15px;
+  letter-spacing: -0.03em;
+}
+.pick__slots .slot.is-selected .slot__time {
+  transform: none;
+}
+.pick__slots .slot .slot__tick {
+  right: 5px;
+  top: 5px;
+  width: 12px;
+  height: 12px;
+  margin: 0;
+}
+.pick__cal {
+  display: grid;
+  justify-items: center;
+  min-width: 0;
+}
+.pick__slots {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  max-height: 520px;
+}
+.slots__head {
+  padding-bottom: 16px;
+}
+.slots__day {
+  font-family: var(--display);
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+.slots__date {
+  margin-top: 6px;
+  font-size: 15px;
+  color: var(--stone);
+}
+.slots__scroll {
+  flex: 1;
+  min-height: 0;
+  margin: 0 -6px;
+  padding: 4px 6px 6px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(15, 19, 14, 0.2) transparent;
+}
+
+.empty {
+  display: grid;
+  justify-items: start;
+  gap: 10px;
+  padding: 24px;
+  border-radius: var(--r-card);
+  background: var(--paper);
+  animation: slot-in 420ms var(--ease) both;
+}
+.empty__icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--card);
+  color: var(--stone);
+}
+.empty__icon .icon {
+  width: 22px;
+  height: 22px;
+}
+.empty__title {
+  font-size: 18px;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+.empty__text {
+  font-size: 15px;
+  color: var(--stone);
+}
+.empty .btn {
+  margin-top: 6px;
+}
+
+.actionbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+.booking:not([data-step="pick"]) .actionbar {
+  display: none;
+}
+.actionbar__text {
+  min-width: 0;
+  line-height: 1.25;
+}
+.actionbar__hint {
+  font-size: 15px;
+  color: var(--stone);
+}
+.actionbar__when {
+  display: block;
+  font-size: 18px;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  animation: settle 360ms var(--ease) both;
+}
+.actionbar__sub {
+  display: block;
+  margin-top: 2px;
+  font-size: 13px;
+  color: var(--stone);
+}
+#continue[aria-disabled="true"] .btn__disc {
+  background: rgba(245, 244, 238, 0.25);
+  color: var(--paper);
+}
+
+/* ---------- step 2 ---------- */
+
+.step--details {
+  max-width: 540px;
+}
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  min-height: 40px;
+  margin: -8px 0 12px -12px;
+  padding: 0 14px 0 10px;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--stone);
+}
+@media (hover: hover) {
+  .back:hover {
+    background: rgba(15, 19, 14, 0.06);
+    color: var(--ink);
+  }
+}
+.chosen {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 20px;
+  padding: 14px 16px;
+  border-radius: var(--r-control);
+  background: var(--lime-soft);
+}
+.chosen__icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--lime);
+}
+.chosen__day {
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+.chosen__time {
+  font-size: 14px;
+  color: #37432b;
+}
+.form {
+  display: grid;
+  gap: 18px;
+  margin-top: 24px;
+}
+.form__submit {
+  margin-top: 6px;
+  min-height: 58px;
+  font-size: 17px;
+  justify-content: space-between;
+  padding-left: 28px;
+  padding-right: 10px;
+}
+.form .field__hint {
+  justify-self: end;
+  margin-top: -2px;
+  font-size: 12px;
+}
+
+/* ---------- step 3 ---------- */
+
+.step--done {
+  justify-content: center;
+  max-width: 560px;
+}
+.done__title {
+  margin-top: 24px;
+  font-family: var(--display);
+  font-size: 56px;
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 0.95;
+}
+.done__title:focus {
+  outline: none;
+}
+.done__sub {
+  margin-top: 12px;
+  font-size: 18px;
+  color: var(--stone);
+  overflow-wrap: anywhere;
+}
+.done .ticket {
+  margin-top: 28px;
+}
+.done__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+.done__note {
+  margin-top: 16px;
+  font-size: 14px;
+  color: var(--stone);
+}
+
+/* Whole-pane error (server unreachable on first load). */
+.fatal {
+  display: grid;
+  justify-items: start;
+  align-content: center;
+  gap: 12px;
+  flex: 1;
+  max-width: 420px;
+}
+.fatal__title {
+  font-family: var(--display);
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+}
+.fatal__text {
+  color: var(--stone);
+}
+
+/* Short windows (a 1200 x 800 recording): tighten the frame so nothing scrolls. */
+@media (min-width: 921px) and (max-height: 860px) {
+  .stage {
+    gap: 12px;
+    padding-block: 16px;
+  }
+  .booking {
+    min-height: 600px;
+  }
+  .pane {
+    padding-block: 32px;
+  }
+}
+
+/* ---------- narrower desktop ---------- */
+
+@media (max-width: 1100px) {
+  .booking {
+    grid-template-columns: 300px minmax(0, 1fr);
+  }
+  .host {
+    padding: 32px 28px;
+  }
+  .host__meeting {
+    font-size: 36px;
+  }
+  .pane {
+    padding: 32px;
+  }
+  .pick {
+    grid-template-columns: minmax(0, 1fr) 282px;
+    gap: 24px;
+  }
+  .pick__slots .slot {
+    font-size: 14px;
+  }
+  .cal {
+    --cell: 48px;
+  }
+}
+
+@media (max-width: 1010px) {
+  .booking {
+    grid-template-columns: 250px minmax(0, 1fr);
+  }
+  .host {
+    padding: 28px 22px;
+  }
+  .host__meeting {
+    font-size: 32px;
+  }
+  .pane {
+    padding: 28px 24px;
+  }
+  .pick {
+    grid-template-columns: minmax(0, 1fr) 258px;
+    gap: 20px;
+  }
+  .pick__slots .slot {
+    padding: 0 2px;
+    font-size: 13px;
+  }
+}
+
+/* ---------- phone and small tablet: one column, action pinned to the thumb ---------- */
+
+@media (max-width: 920px) {
+  .stage {
+    align-content: start;
+    gap: 0;
+    padding: 0;
+  }
+  .shell {
+    padding: 0;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+  }
+  .booking {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .host {
+    padding: 20px 20px 18px;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .avatar {
+    width: 48px;
+    height: 48px;
+    font-size: 23px;
+  }
+  .host__name {
+    font-size: 17px;
+  }
+  .host__agency {
+    font-size: 14px;
+  }
+  .host__meeting {
+    margin-top: 18px;
+    font-size: 34px;
+  }
+  .host__desc {
+    margin-top: 10px;
+    font-size: 15px;
+  }
+  .host__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+    padding-top: 0;
+    border-top: 0;
+    font-size: 14px;
+  }
+  .host__meta li {
+    gap: 6px;
+    padding: 7px 12px 7px 9px;
+    border-radius: 999px;
+    background: rgba(15, 19, 14, 0.06);
+  }
+  .host__meta .icon {
+    width: 16px;
+    height: 16px;
+    color: var(--ink);
+  }
+  /* After step 1 the host block shrinks to its first row to keep the form in view. */
+  .booking:not([data-step="pick"]) .host__meeting,
+  .booking:not([data-step="pick"]) .host__desc,
+  .booking:not([data-step="pick"]) .host__meta {
+    display: none;
+  }
+
+  .pane {
+    padding: 24px 20px 36px;
+  }
+  .pick {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+  .cal {
+    --cell: 50px;
+    max-width: 420px;
+  }
+  .pick__slots {
+    max-height: none;
+    scroll-margin-top: 16px;
+  }
+  .slots__scroll {
+    overflow: visible;
+  }
+  .pick__slots .slot {
+    padding: 0 8px;
+    font-size: 16px;
+    letter-spacing: -0.02em;
+  }
+  .pick__slots .slot .slot__tick {
+    right: 6px;
+    top: 6px;
+    width: 13px;
+    height: 13px;
+  }
+
+  .actionbar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 20;
+    margin: 0;
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+    border-top: 1px solid var(--line);
+    background: var(--card);
+    box-shadow: 0 -12px 32px -16px rgba(15, 19, 14, 0.25);
+    transform: translateY(110%);
+    transition: transform var(--t-panel) var(--ease);
+  }
+  .booking.has-slot .actionbar {
+    transform: none;
+  }
+  .actionbar__when {
+    font-size: 16px;
+  }
+
+  .step__title {
+    font-size: 34px;
+  }
+  .done__title {
+    margin-top: 20px;
+    font-size: 48px;
+  }
+  .step--done {
+    justify-content: flex-start;
+    padding-top: 8px;
+  }
+  .done__actions .btn {
+    flex: 1 1 100%;
+  }
+  .credit {
+    padding: 20px 20px calc(28px + env(safe-area-inset-bottom, 0px));
+  }
+  .shell:has(.has-slot[data-step="pick"]) + .credit {
+    padding-bottom: calc(104px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media (max-width: 420px) {
+  .cal {
+    --cell: 46px;
+  }
+  .cal__title {
+    font-size: 27px;
+  }
+  .ticket__date {
+    min-width: 100px;
+    padding: 18px 14px;
+  }
+  .ticket__day {
+    font-size: 56px;
+  }
+  .ticket__info {
+    padding: 18px 16px;
+  }
+  .ticket__time {
+    font-size: 21px;
+  }
+}

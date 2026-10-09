@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard</title>
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body class="page-admin">
+  <header class="topbar">
+    <a class="brand" href="/admin">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name" data-agency>Your Agency</span>
+      <span class="tag">Dashboard</span>
+    </a>
+    <div class="topbar-actions" id="topActions" hidden>
+      <a class="btn btn-ghost btn-sm" href="/" target="_blank" rel="noopener">View booking page</a>
+      <button class="btn btn-primary btn-sm" id="copyLink" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8.500" y="8.500" width="11" height="11" rx="2.500"/><path d="M15.500 8.500V6.500a2 2 0 0 0-2-2h-7a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h2"/></svg>
+        Copy booking link
+      </button>
+    </div>
+  </header>
+
+  <!-- Shown only when a passcode is set in config.json -->
+  <section class="gate" id="gate" hidden>
+    <form class="box" id="gateForm">
+      <div class="box-body">
+        <h1 class="box-title">Enter passcode</h1>
+        <p>This dashboard is protected.</p>
+        <input class="input" id="gateInput" type="password" autocomplete="current-password" aria-label="Passcode" required>
+        <span class="field-error" id="gateError"></span>
+        <button class="btn btn-primary btn-block" type="submit">Unlock</button>
+      </div>
+    </form>
+  </section>
+
+  <main class="admin" id="admin" hidden>
+    <div class="admin-head">
+      <div>
+        <h1 class="admin-title">Hi, <span data-first-name>there</span>.</h1>
+        <p class="admin-sub" id="summary">&nbsp;</p>
+      </div>
+    </div>
+
+    <div class="admin-grid">
+      <section class="box">
+        <div class="box-head">
+          <h2 class="box-title">Upcoming bookings<span class="count" id="bookingCount">0</span></h2>
+        </div>
+        <div class="box-body">
+          <div class="sample-note" id="sampleNote" hidden>
+            <span id="sampleText"></span>
+            <button class="link-btn" id="clearSamples" type="button">Clear sample data</button>
+          </div>
+          <div id="bookingList"></div>
+        </div>
+      </section>
+
+      <div class="admin-side">
+        <section class="box">
+          <div class="box-head">
+            <h2 class="box-title">Availability</h2>
+            <span class="saved" id="availSaved"></span>
+          </div>
+          <div class="box-body">
+            <div id="dayRows"></div>
+
+            <div class="rules">
+              <label>
+                <span class="mini-label">Meeting length</span>
+                <select class="select" id="meetingLength"></select>
+              </label>
+              <label>
+                <span class="mini-label">Buffer between</span>
+                <select class="select" id="buffer"></select>
+              </label>
+              <label>
+                <span class="mini-label">Book ahead</span>
+                <select class="select" id="daysAhead"></select>
+              </label>
+            </div>
+            <div class="rules rules-wide">
+              <label>
+                <span class="mini-label">Timezone</span>
+                <select class="select" id="timezone"></select>
+              </label>
+            </div>
+          </div>
+        </section>
+
+        <section class="box">
+          <div class="box-head">
+            <h2 class="box-title">Profile</h2>
+            <span class="saved" id="profileSaved"></span>
+          </div>
+          <div class="box-body stack">
+            <label>
+              <span class="mini-label">Your name</span>
+              <input class="input" id="pName" type="text" maxlength="60">
+            </label>
+            <label>
+              <span class="mini-label">Agency name</span>
+              <input class="input" id="pAgency" type="text" maxlength="60">
+            </label>
+            <label>
+              <span class="mini-label">Meeting name</span>
+              <input class="input" id="pMeeting" type="text" maxlength="40" placeholder="intro call">
+            </label>
+            <label>
+              <span class="mini-label">One-line description</span>
+              <textarea class="input" id="pDescription" rows="3" maxlength="280"></textarea>
+            </label>
+            <div>
+              <span class="mini-label">Your booking link</span>
+              <div class="link-row">
+                <input class="input" id="linkField" type="text" readonly aria-label="Booking link">
+                <button class="btn btn-ghost" id="copyLink2" type="button">Copy</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <div class="toast" id="toast" role="status"></div>
+  <script src="/assets/admin.js"></script>
+</body>
+</html>

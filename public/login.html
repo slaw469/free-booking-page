@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Sign in · Dashboard</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0f130e">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/admin.css">
+  <script type="module" src="assets/js/login.js"></script>
+</head>
+<body class="admin-page">
+  <!-- The server sends this page for /admin when a passcode is set and this browser has not signed in. -->
+  <main class="gate" id="gate">
+    <form class="gate__card" id="gate-form" novalidate>
+      <div class="gate__lock" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><use href="assets/icons.svg#i-lock"/></svg></div>
+      <h1 class="gate__title">Dashboard locked</h1>
+      <p class="gate__text">Enter your dashboard passcode to continue.</p>
+      <div class="field">
+        <label class="field__label" for="passcode">Passcode</label>
+        <input class="field__input" id="passcode" name="passcode" type="password" autocomplete="current-password" required autofocus aria-describedby="passcode-error">
+        <p class="field__error" id="passcode-error" role="alert" hidden></p>
+      </div>
+      <button class="btn btn--block" id="gate-submit" type="submit">Unlock</button>
+      <a class="link gate__back" href="./">Back to the home page</a>
+    </form>
+  </main>
+  <noscript><p style="padding:24px;text-align:center;color:#fff">Signing in needs JavaScript turned on.</p></noscript>
+</body>
+</html>

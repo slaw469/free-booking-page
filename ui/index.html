@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Book a call</title>
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body class="page-public">
+  <header class="topbar">
+    <a class="brand" href="/">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name" data-agency>Your Agency</span>
+    </a>
+    <span class="topbar-note">Book a call</span>
+  </header>
+
+  <main class="stage">
+    <section class="card" id="card" data-step="pick" aria-live="polite">
+
+      <aside class="host">
+        <div class="host-id">
+          <span class="avatar" data-initial aria-hidden="true">Y</span>
+          <div>
+            <p class="host-name" data-name>Your Name</p>
+            <p class="host-agency" data-agency>Your Agency</p>
+          </div>
+        </div>
+
+        <h1 class="meeting-title" data-meeting>30 min intro call</h1>
+        <p class="host-desc" data-description></p>
+
+        <ul class="facts">
+          <li>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>
+            <span data-length>30 min</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.6 2.4 3.9 5.2 3.9 8.500s-1.300 6.100-3.900 8.500c-2.600-2.400-3.900-5.200-3.900-8.500s1.300-6.100 3.900-8.500z"/></svg>
+            <span data-timezone>Central Time</span>
+          </li>
+        </ul>
+
+        <div class="chosen" id="chosen" hidden>
+          <p class="chosen-label">Your time</p>
+          <p class="chosen-date" id="chosenDate"></p>
+          <p class="chosen-time" id="chosenTime"></p>
+          <button class="link-btn" id="changeTime" type="button">Change</button>
+        </div>
+      </aside>
+
+      <!-- Step 1: day and time -->
+      <div class="panel panel-pick" data-panel="pick">
+        <div class="calendar">
+          <div class="cal-head">
+            <h2 class="cal-title" id="calTitle">&nbsp;</h2>
+            <div class="cal-nav">
+              <button class="icon-btn" id="prevMonth" type="button" aria-label="Previous month">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.500 6l-6 6 6 6"/></svg>
+              </button>
+              <button class="icon-btn" id="nextMonth" type="button" aria-label="Next month">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.500 6l6 6-6 6"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="cal-weekdays" aria-hidden="true">
+            <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+          </div>
+          <div class="cal-grid" id="calGrid"></div>
+          <p class="cal-legend"><span class="legend-dot"></span>Available</p>
+        </div>
+
+        <div class="slots" id="slots">
+          <h2 class="slots-title" id="slotsTitle">Pick a day</h2>
+          <p class="slots-hint" id="slotsHint">Open days are highlighted. Choose one to see the times.</p>
+          <div class="slot-grid" id="slotGrid"></div>
+          <div class="slots-cta">
+            <button class="btn btn-primary btn-block" id="continueBtn" type="button" hidden>Continue</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: details -->
+      <div class="panel panel-form" data-panel="form" hidden>
+        <form id="bookForm" novalidate>
+          <h2 class="panel-title">Your details</h2>
+          <p class="panel-sub">Almost done. Tell <span data-first-name>them</span> who to expect.</p>
+
+          <p class="form-alert" id="formAlert" role="alert" hidden></p>
+
+          <label class="field">
+            <span class="field-label">Name</span>
+            <input id="fName" name="name" type="text" autocomplete="name" maxlength="80" placeholder="Jordan Lee" required>
+            <span class="field-error" data-error="name"></span>
+          </label>
+
+          <label class="field">
+            <span class="field-label">Email</span>
+            <input id="fEmail" name="email" type="email" autocomplete="email" maxlength="120" placeholder="jordan@example.com" required>
+            <span class="field-error" data-error="email"></span>
+          </label>
+
+          <label class="field">
+            <span class="field-label">What do you want to talk about? <em>Optional</em></span>
+            <textarea id="fNote" name="note" rows="3" maxlength="600" placeholder="A sentence or two is plenty."></textarea>
+          </label>
+
+          <div class="form-actions">
+            <button class="btn btn-ghost" id="backBtn" type="button">Back</button>
+            <button class="btn btn-primary" id="confirmBtn" type="submit">Confirm booking</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Step 3: confirmation -->
+      <div class="panel panel-done" data-panel="done" hidden>
+        <div class="done-check" aria-hidden="true">
+          <svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24"/><path d="M15.500 27l7 7 14-15"/></svg>
+        </div>
+        <h2 class="done-title">You're booked.</h2>
+        <p class="done-sub" id="doneSub"></p>
+
+        <dl class="receipt">
+          <div><dt>Date</dt><dd id="doneDate"></dd></div>
+          <div><dt>Time</dt><dd id="doneTime"></dd></div>
+          <div><dt>With</dt><dd id="doneWith"></dd></div>
+        </dl>
+
+        <div class="done-actions">
+          <a class="btn btn-primary" id="icsLink" href="#" download="booking.ics">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5.500" width="16" height="14.500" rx="2.500"/><path d="M4 10h16M8.500 3.500v4M15.500 3.500v4M12 12.500v5M9.500 15h5"/></svg>
+            Add to calendar
+          </a>
+          <button class="link-btn" id="bookAnother" type="button">Book another</button>
+        </div>
+      </div>
+
+    </section>
+
+    <p class="footnote">Free, self-hosted booking page. No subscription.</p>
+  </main>
+
+  <script src="/assets/app.js"></script>
+</body>
+</html>
